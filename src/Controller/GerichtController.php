@@ -11,21 +11,19 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-/**
- * @Route("/gericht", name="gericht.")
- */
+
 class GerichtController extends AbstractController
 {
     /**
-    * @Route("/", name="bearbeiten")
+    * @Route("/gericht", name="bearbeiten")
      */
     public function index(GerichtRepository $gr): Response
     {
 
-        $gerichte = $gr->findAll();
+       // $gerichte = $gr->findAll();
 
-        return $this->render('gericht/index.html.twig;', [
-            'gerichte' => $gerichte
+        return $this->render('gericht/index.html.twig', [
+            'gerichte' => []
         ]);
     }
 
@@ -58,7 +56,7 @@ class GerichtController extends AbstractController
             $em->persist($gericht);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('gericht.bearbeiten'));
+            return $this->redirect($this->generateUrl('bearbeiten'));
         }
 
         //Response
@@ -79,7 +77,7 @@ class GerichtController extends AbstractController
 
         //message
         $this->addFlash('erfolg', 'Gericht wurde erfolgreich entfernt');
-        return $this->redirect($this->generateUrl('gericht.bearbeiten'));
+        return $this->redirect($this->generateUrl('bearbeiten'));
     }
 
     /**

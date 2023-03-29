@@ -29,7 +29,7 @@ class GerichtType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Gericht::class,
+            'data_class' => null,
         ]);
     }
 }
