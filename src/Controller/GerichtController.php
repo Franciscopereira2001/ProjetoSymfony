@@ -32,7 +32,7 @@ class GerichtController extends AbstractController
     /**
      * @Route("/anlegen", name="anlegen")
      */
-    public function anlegen(Request $request)
+    public function anlegechn(Request $request)
     {
         $gericht = new Gericht();
 

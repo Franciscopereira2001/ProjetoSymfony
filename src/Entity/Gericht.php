@@ -5,25 +5,42 @@ namespace App\Entity;
 use App\Repository\GerichtRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: GerichtRepository::class)]
+/**
+ * @ORM\Entity(repositoryClass=GerichtRepository::class)
+ */
 class Gericht
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
 
-
-    #[ORM\Column(type: "string", length: 255)]
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $bild;
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $beschreibund = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?float $preis = null;
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Kategorie", inversedBy="gericht")
+     */
+    private $kategorie;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $beschreibung;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $preis;
 
     public function getId(): ?int
     {
@@ -42,6 +59,17 @@ class Gericht
         return $this;
     }
 
+    public function getBeschreibung(): ?string
+    {
+        return $this->beschreibung;
+    }
+
+    public function setBeschreibung(?string $beschreibung): self
+    {
+        $this->beschreibung = $beschreibung;
+
+        return $this;
+    }
 
     public function getPreis(): ?float
     {
@@ -67,16 +95,15 @@ class Gericht
         return $this;
     }
 
-    public function getBeschreibund(): ?string
+    public function getKategorie(): ?Kategorie
     {
-        return $this->beschreibund;
+        return $this->kategorie;
     }
 
-    public function setBeschreibund(?string $beschreibund): self
+    public function setKategorie(?Kategorie $kategorie): self
     {
-        $this->beschreibund = $beschreibund;
+        $this->kategorie = $kategorie;
 
         return $this;
     }
-
 }

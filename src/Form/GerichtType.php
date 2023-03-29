@@ -19,6 +19,9 @@ class GerichtType extends AbstractType
             ->add('name')
             ->add('anhang', FileType::class , ['mapped' => false])
             ->add('beschreibung')
+            ->add('kategorie', EntityType::class, [
+                'class' =>Kategorie::class
+            ])
             ->add('preis')
             ->add('speichern', SubmitType::class);
     }
